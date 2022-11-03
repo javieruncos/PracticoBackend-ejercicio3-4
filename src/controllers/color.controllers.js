@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import Color from "../models/color";
 
 
@@ -60,16 +61,14 @@ export const borrarColor = async(req,res)=>{
 
 
 
-
-
-
-
-
-
-
-
 export const crearColor = async (req,res)=>{
    try {
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                errores:errors.array()
+            })
+        }
        const colorNuevo = new Color(req.body)
        await colorNuevo.save()
        res.status(201).json({
