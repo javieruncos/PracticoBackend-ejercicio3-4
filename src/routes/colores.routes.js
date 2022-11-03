@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { crearColor, listarColores, obtenerColores } from "../controllers/color.controllers";
+import { borrarColor, crearColor, editarColor, listarColores, obtenerColores } from "../controllers/color.controllers";
 
 const router = Router();
 
 router.route("/colores").get(listarColores).post(crearColor)
-router.route("/colores/:id").get(obtenerColores)
+router.route("/colores/:id").get(obtenerColores).put(editarColor).delete(borrarColor)
 
 
 
