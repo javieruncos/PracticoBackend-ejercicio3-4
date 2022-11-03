@@ -24,7 +24,12 @@ router.route("/colores")
 router
   .route("/colores/:id")
   .get(obtenerColores)
-  .put(editarColor)
+  .put([check("color")
+  .notEmpty()
+  .withMessage("el nombre del color es obligatorio")
+  .isLength({min:3})
+  .withMessage("la cantidad minima de caracteres es de 3")
+],editarColor)
   .delete(borrarColor);
 
 export default router;
